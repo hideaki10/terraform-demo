@@ -1,0 +1,6 @@
+aws_profile       = "administrator"
+aws_region        = "ap-northeast-1"
+aws_subnet_id     = "subnet-070818850a3a228f0"
+instance_type     = "t2.micro"
+cidr_block        = "10.0.0.0/16"
+subnet_cidr_block = "10.0.1.0/24"
