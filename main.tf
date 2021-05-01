@@ -14,10 +14,10 @@ provider "aws" {
 
 
 
-//iam_role_policy
-resource "aws_iam_role_policy" "test_policy" {
+//_role_policy
+resource "aws__role_policy" "test_policy" {
   name = "test_policy"
-  role = aws_iam_role.example.id
+  role = aws__role.example.id
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -35,8 +35,8 @@ resource "aws_iam_role_policy" "test_policy" {
   })
 }
 
-//iam_role
-resource "aws_iam_role" "example" {
+//_role
+resource "aws__role" "example" {
   name = "test_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -55,15 +55,15 @@ resource "aws_iam_role" "example" {
 
 //instance_profile
 
-# resource "aws_iam_instance_profile" "example" {
-#   role = aws_iam_role.example.name
+# resource "aws__instance_profile" "example" {
+#   role = aws__role.example.name
 # }
 
-resource "aws_iam_instance_profile" "example" {
+resource "aws__instance_profile" "example" {
   name = "example"
   # Because this expression refers to the role, Terraform can infer
   # automatically that the role must be created first.
-  role = aws_iam_role.example.name
+  role = aws__role.example.name
 }
 
 //instance 
@@ -71,10 +71,10 @@ resource "aws_instance" "exapmle" {
   ami           = "ami-0ab3e16f9c414dee7"
   instance_type = "t2.micro"
   subnet_id     = "subnet-0dcdbd1f5d675b47c"
-  //iam_instance_profile = aws_iam_instance_profile.example
-  iam_instance_profile = aws_iam_instance_profile.example.name
+  //_instance_profile = aws__instance_profile.example
+  _instance_profile = aws__instance_profile.example.name
   # depends_on = [
-  #   aws_iam_role_policy.example
+  #   aws__role_policy.example
   # ]
 }
 

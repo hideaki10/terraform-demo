@@ -1,0 +1,2 @@
+- name: copy conf
+  template: src=nginx.conf.j2 desc=/etc/nginx/nginx.conf

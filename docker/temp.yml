@@ -1,0 +1,11 @@
+---
+- hosts: websrvs
+  remote_user: root
+
+  tasks:
+    - name: install package
+      yum: name=nginx
+    - name: copy template
+      template: src=/root/ansible/templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+    - name: start service
+      service: name =nginx state=started enabled=yes
