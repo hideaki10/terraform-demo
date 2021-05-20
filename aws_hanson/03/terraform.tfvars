@@ -1,0 +1,5 @@
+aws_profile = "administrator"
+aws_region  = "ap-northeast-1"
+aws_ami     = "ami-0f037327d64de9e49"
+cpu_options = "t2.micro"
+key_pair    = "amazon-new-key"
