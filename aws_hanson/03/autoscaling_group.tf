@@ -13,9 +13,6 @@ resource "aws_autoscaling_group" "blog" {
     version = "$Latest"
   }
   health_check_type = "ELB"
-
-  target_group_arns = [aws_alb_target_group.blog_webserver_target_group.arn]
-
   lifecycle {
     ignore_changes = [load_balancers, target_group_arns]
   }
@@ -24,7 +21,7 @@ resource "aws_autoscaling_group" "blog" {
 
 resource "aws_autoscaling_attachment" "asg_attachment_bar" {
   autoscaling_group_name = aws_autoscaling_group.blog.id
-  elb                    = aws_alb.blog_webserver.id
+  alb_target_group_arn   = aws_alb_target_group.blog_webserver_target_group.arn
 }
 
 
