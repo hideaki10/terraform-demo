@@ -4,16 +4,21 @@ resource "aws_autoscaling_group" "blog" {
   desired_capacity = 2
   min_size         = 2
   max_size         = 2
-  availability_zones = [
-    var.availability_zone_names[0],
-    var.availability_zone_names[1]
+  vpc_zone_identifier = [
+    module.vpc.public_subnets[0],
+    module.vpc.public_subnets[1]
   ]
   launch_template {
     id      = aws_launch_template.blog.id
     version = "$Latest"
   }
-  health_check_type = "elb"
+  health_check_type = "ELB"
 
+  target_group_arns = [aws_alb_target_group.blog_webserver_target_group.arn]
+
+  lifecycle {
+    ignore_changes = [load_balancers, target_group_arns]
+  }
 }
 
 
